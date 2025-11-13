@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+# React Software Engineer Scenario
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interactive book list experience built with Vite + React + TypeScript. The component showcases reusable patterns, accessibility-first UI, inline composition, live search, and automated tests.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js 18.0+ (or any active LTS release)
+- npm 9+ (bundled with recent Node distributions)
 
-## React Compiler
+Verify versions:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+node --version
+npm --version
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Install dependencies once:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### Develop
+
+Start Vite in dev mode with HMR:
+
+```bash
+npm run dev
+```
+
+Then open the printed URL (usually `http://localhost:5173`) to interact with the app. The main view lives in `src/App.tsx`, and the reusable component is under `src/components/BookList.tsx`.
+
+### Test
+
+Run Vitest + React Testing Library specs:
+
+```bash
+npm test
+```
+
+Add `--watch` for TDD workflows.
+
+### Build
+
+Create a production bundle:
+
+```bash
+npm run build
+```
+
+Preview the build locally:
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```
+├─ src/
+│  ├─ App.tsx              # Entry view wiring mock data → BookList
+│  ├─ components/
+│  │  ├─ BookList.tsx      # Reusable list + composer component
+│  │  ├─ BookList.css      # Component-scoped styling
+│  │  └─ BookList.test.tsx # RTL/Vitest coverage
+│  ├─ main.tsx             # React root mounting
+│  └─ setupTests.ts        # Jest-DOM setup for Vitest
+├─ package.json
+└─ vite.config.ts
+```
+
+## Notes
+
+- Styling sticks to plain CSS for readability while remaining accessible (focus states, reduced-motion fallbacks).
+- Mock data is in-memory; swap in a data source or API when needed.
