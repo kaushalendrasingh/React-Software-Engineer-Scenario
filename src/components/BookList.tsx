@@ -156,7 +156,7 @@ export function BookList({
         <form className="book-composer" onSubmit={handleComposerSubmit} aria-label="Add a custom book">
           <div className="book-composer__grid">
             <label className="book-composer__field" htmlFor={composerTitleId}>
-              Title<span aria-hidden="true">*</span>
+              Title *
               <input
                 id={composerTitleId}
                 name="title"
